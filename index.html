@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snake</title>
+		<script src="utilities/underscore.js"></script>
+		<script src="snake.js"></script>
+		<script src="snake_ui.js"></script>
+		<script src="board.js"></script>
+		<style>
+		html, body, h1, ul, li {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font: inherit;
+		}
+		
+		body {
+			font-family: sans-serif;
+		}
+		
+		.group:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		
+		h1 {
+			font-weight: 800;
+			font-size: 36px;
+			text-align: center;
+		}
+		
+		ul {
+			list-style: none;
+			width: 600px;
+			margin: 20px auto;
+			border: 5px solid #000;
+		}
+		
+		li {
+			float: left;
+			width: 20px;
+			height: 20px;
+		}
+		
+		.snake {
+			background: green;
+		}
+		
+		.apple {
+			background: red;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Snake</h1>
+		
+		<ul class="group"></ul>
+		
+		<script src="utilities/jquery.js"></script>
+		<script>
+		$(document).ready(function () {
+			var game = new SnakeGame.View();
+			game.start();
+		});
+		</script>
+	</body>
+</html>
