@@ -27,8 +27,8 @@
 	}
 	
 	Snake.prototype.checkMove = function () {
-		if (_(this.pos).isEqual(this.board.apple.pos)) {
-			this.eatApple();
+		if (_(this.pos).isEqual(this.board.food.pos)) {
+			this.eatFood();
 		}
 		else if (!this.board.validPos() || this.hitSelf()) {
 			this.lost = true;
@@ -39,10 +39,10 @@
 		}
 	}
 	
-	Snake.prototype.eatApple = function () {
-		var apple = this.board.apple;
-		this.segments.unshift(apple.pos);
-		this.board.apple = this.board.generateApple();
+	Snake.prototype.eatFood = function () {
+		var food = this.board.food;
+		this.segments.unshift(food.pos);
+		this.board.food = this.board.generateFood();
 	}
 	
 	Snake.prototype.hitSelf = function () {

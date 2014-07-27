@@ -3,13 +3,13 @@
 	
 	var Board = SnakeGame.Board = function () {
 		this.snake = new SnakeGame.Snake(this);
-		this.apple = this.generateApple();
+		this.food = this.generateFood();
 	}
 	
 	Board.DIMS = 20;
 	Board.CENTER = [Board.DIMS / 2, Board.DIMS / 2];
 	
-	Board.prototype.generateApple = function () {
+	Board.prototype.generateFood = function () {
 		var randomPos = function () {
 			return [Math.floor(Math.random() * Board.DIMS),
 							Math.floor(Math.random() * Board.DIMS)];
@@ -21,13 +21,18 @@
 			pos = randomPos();
 		}
 		
-		return { pos: pos };
+		var food = ["apple", "banana", "burger", "chicken", "pizza"];
+		
+		return {
+			pos: pos,
+			foodClass: food[Math.floor(Math.random() * food.length)]
+		};
 	}
 	
 	Board.prototype.constructBoard = function () {
 		this.grid = this.createGrid();
 		this.placeSnake();
-		this.placeApple();
+		this.placeFood();
 	}
 	
 	Board.prototype.createGrid = function () {
@@ -47,13 +52,13 @@
 	Board.prototype.placeSnake = function () {
 		var grid = this.grid;
 		
-		this.snake.segments.forEach(function (pos) {
-			grid[pos[0]][pos[1]] = "S";
+		this.snake.segments.forEach(function (pos, index) {
+			grid[pos[0]][pos[1]] = (index === 0) ? "H" : "S";
 		});
 	}
 	
-	Board.prototype.placeApple = function () {
-		var pos = this.apple.pos;
+	Board.prototype.placeFood = function () {
+		var pos = this.food.pos;
 		this.grid[pos[0]][pos[1]] = "A";
 	}
 	

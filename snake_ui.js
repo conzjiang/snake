@@ -57,6 +57,7 @@
 	View.prototype.renderBoard = function () {
 		this.board.constructBoard();
 		var $el = this.$el;
+		var food = this.board.food.foodClass;
 		
 		$el.empty();
 		$("strong#score").empty();
@@ -65,9 +66,12 @@
 		_.flatten(this.board.grid).forEach(function (space) {
 			if (space === "S") {
 				$el.append("<li class='snake'>");
-			} 
+			}
+			else if (space === "H") {
+				$el.append("<li class='snake head'>");
+			}
 			else if (space === "A") {
-				$el.append("<li class='apple'>");
+				$el.append("<li class='" + food + "'>");
 			} 
 			else {
 				$el.append("<li>");

@@ -7,7 +7,7 @@
 		<script src="snake_ui.js"></script>
 		<script src="board.js"></script>
 		<style>
-		html, body, h1, h2, strong, ul, li, div, section, article, p {
+		html, body, h1, h2, strong, ul, li, div, section, article, p, span {
 			margin: 0;
 			padding: 0;
 			border: 0;
@@ -84,8 +84,37 @@
 			border-radius: 5px;
 		}
 		
+		.head {
+			background: #f00;
+		}
+		
 		.apple {
-			background-image: url("apple.ico");
+			background-image: url("food_sprites.png");
+			background-position: 0 0;
+			background-size: cover;
+		}
+		
+		.banana {
+			background-image: url("food_sprites.png");
+			background-position: 0 80px;
+			background-size: cover;
+		}
+		
+		.burger {
+			background-image: url("food_sprites.png");
+			background-position: 0 60px;
+			background-size: cover;
+		}
+		
+		.chicken {
+			background-image: url("food_sprites.png");
+			background-position: 0 40px;
+			background-size: cover;
+		}
+		
+		.pizza {
+			background-image: url("food_sprites.png");
+			background-position: 0 20px;
 			background-size: cover;
 		}
 		
@@ -130,15 +159,12 @@
 			background: #00A338;
 		}
 		
-		section.game-status > article#pause {
+		section.game-status > article#pause,
+		section.game-status > article#end {
 			display: none;
 		}
 		
 		section.start-game {
-			display: none;
-		}
-		
-		article.hide {
 			display: none;
 		}
 		
@@ -154,7 +180,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>Snake</h1>
+		<h1>A Very Hungry Caterpillar</h1>
 		<h2>Score: <strong id="score">0</strong></h2>
 		
 		<div class="game">
@@ -167,6 +193,11 @@
 			
 				<article id="pause" class="buttons-container">
 					<button class="resume">Resume</button>
+					<button class="new-game">New Game</button>
+				</article>
+				
+				<article id="end" class="buttons-container">
+					<p>You can't eat that! You lose!</p>
 					<button class="new-game">New Game</button>
 				</article>
 			</section>
