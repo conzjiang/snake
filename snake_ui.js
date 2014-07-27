@@ -5,20 +5,23 @@
 		this.$el = $el;
 		this.board = new SnakeGame.Board();
 		this.snake = this.board.snake;
+		this.speed = 300;
+		
+		this.bindKeys();
 	}
 	
 	View.prototype.start = function () {
-		this.bindKeys();
 		this.renderBoard();
 		
 		var view = this;
 		this.interval = setInterval(function () { 
 			view.step();
-		}, 300);
+		}, this.speed);
 	}
 	
 	View.prototype.step = function () {
 		this.snake.move();
+		if (this.snake.segments.length <= 20) this.gaugeSpeed();
 		if (this.snake.lost) this.stop();
 		this.renderBoard();
 	}
@@ -67,6 +70,22 @@
 				$el.append("<li>");
 			}
 		});
+	}
+	
+	View.prototype.gaugeSpeed = function () {
+		var view = this;
+		var changeSpeed = function (newSpeed) {
+			view.stop();
+			view.speed = newSpeed;
+			view.start();
+		}
+		
+		if (this.snake.segments.length === 10) {
+			changeSpeed(200);
+		}
+		else if (this.snake.segments.length === 20) {
+			changeSpeed(100);
+		}
 	}
 	
 	View.prototype.stop = function () {

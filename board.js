@@ -11,7 +11,8 @@
 	
 	Board.prototype.generateApple = function () {
 		var randomPos = function () {
-			return [Math.floor(Math.random() * 30), Math.floor(Math.random() * 30)];
+			return [Math.floor(Math.random() * Board.DIMS),
+							Math.floor(Math.random() * Board.DIMS)];
 		}
 		
 		var pos = randomPos();
