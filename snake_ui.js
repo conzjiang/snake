@@ -6,6 +6,7 @@
 		this.board = new SnakeGame.Board();
 		this.snake = this.board.snake;
 		this.speed = 300;
+		this.score = 0;
 		
 		this.bindKeys();
 	}
@@ -23,6 +24,7 @@
 		this.snake.move();
 		if (this.snake.segments.length <= 20) this.gaugeSpeed();
 		if (this.snake.lost) this.stop();
+		this.countScore();
 		this.renderBoard();
 	}
 	
@@ -58,6 +60,8 @@
 		var $el = this.$el;
 		
 		$el.empty();
+		$("strong#score").empty();
+		$("strong#score").html(this.score);
 		
 		_.flatten(this.board.grid).forEach(function (space) {
 			if (space === "S") {
@@ -84,11 +88,15 @@
 			changeSpeed(200);
 		}
 		else if (this.snake.segments.length === 20) {
-			changeSpeed(100);
+			changeSpeed(150);
 		}
 	}
 	
 	View.prototype.stop = function () {
 		clearInterval(this.interval);
+	}
+	
+	View.prototype.countScore = function () {
+		this.score = (this.snake.segments.length - 1) * 10;
 	}
 })(this);

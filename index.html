@@ -7,7 +7,7 @@
 		<script src="snake_ui.js"></script>
 		<script src="board.js"></script>
 		<style>
-		html, body, h1, ul, li {
+		html, body, h1, h2, strong, ul, li {
 			margin: 0;
 			padding: 0;
 			border: 0;
@@ -25,14 +25,24 @@
 		}
 		
 		h1 {
+			display: block;
+			margin-top: 10px;
 			font-weight: 800;
 			font-size: 36px;
 			text-align: center;
 		}
 		
+		h2 {
+			display: block;
+			margin: 5px 0;
+			font-weight: 600;
+			font-size: 20px;
+			text-align: center;
+		}
+		
 		ul {
 			list-style: none;
-			width: 600px;
+			width: 400px;
 			margin: 20px auto;
 			border: 5px solid #000;
 		}
@@ -59,6 +69,7 @@
 	</head>
 	<body>
 		<h1>Snake</h1>
+		<h2>Score: <strong id="score">0</strong></h2>
 		
 		<ul class="group"></ul>
 		

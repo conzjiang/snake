@@ -6,7 +6,7 @@
 		this.apple = this.generateApple();
 	}
 	
-	Board.DIMS = 30;
+	Board.DIMS = 20;
 	Board.CENTER = [Board.DIMS / 2, Board.DIMS / 2];
 	
 	Board.prototype.generateApple = function () {
