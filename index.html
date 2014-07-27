@@ -136,6 +136,11 @@
 			text-align: center;
 		}
 		
+		article#end {
+			margin-top: -70px;
+			height: 140px;
+		}
+		
 		button {
 			padding: 10px 20px;
 			font-weight: 600;
@@ -196,6 +201,22 @@
 			display: block;
 		}
 		
+		section.end-game {
+			background: rgba(145, 145, 145, 0.95);
+		}
+		
+		section.end-game > article#start {
+			display: none;
+		}
+		
+		section.end-game > article#end {
+			display: block;
+		}
+		
+		article#end > h2 {
+			margin: 20px;
+		}
+		
 		p {
 			display: block;
 			margin: 10px 0;
@@ -222,7 +243,8 @@
 				
 				<article id="end" class="buttons-container">
 					<p>You can't eat that! You lose!</p>
-					<button class="new-game">New Game</button>
+					<h2>Final Score: <strong id="score"></strong></h2>
+					<button class="start new-game">New Game</button>
 				</article>
 			</section>
 		</div>

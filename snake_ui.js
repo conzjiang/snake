@@ -22,7 +22,7 @@
 	View.prototype.step = function () {
 		this.snake.move();
 		if (this.snake.segments.length <= 20) this.gaugeSpeed();
-		if (this.snake.lost) this.stop();
+		if (this.snake.lost) this.endGame();
 		this.countScore();
 		this.renderBoard();
 	}
@@ -63,7 +63,6 @@
 		var food = this.board.food.foodClass;
 		
 		$el.empty();
-		$("strong#score").empty();
 		$("strong#score").html(this.score);
 		
 		_.flatten(this.board.grid).forEach(function (space) {
@@ -104,5 +103,12 @@
 	
 	View.prototype.countScore = function () {
 		this.score = (this.snake.segments.length - 1) * 10;
+	}
+	
+	View.prototype.endGame = function () {
+		this.stop();
+		var $section = this.$el.find(".game-status");
+		$section.removeClass("start-game");
+		$section.addClass("end-game");
 	}
 })(this);
