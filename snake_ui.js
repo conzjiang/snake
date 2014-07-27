@@ -1,14 +1,15 @@
 (function (root) {
 	var SnakeGame = root.SnakeGame = (root.SnakeGame || {});
 	
-	var View = SnakeGame.View = function () {
+	var View = SnakeGame.View = function ($el) {
+		this.$el = $el;
 		this.board = new SnakeGame.Board();
 		this.snake = this.board.snake;
 	}
 	
 	View.prototype.start = function () {
 		this.bindKeys();
-		this.board.render();
+		this.renderBoard();
 		
 		var view = this;
 		this.interval = setInterval(function () { 
@@ -19,7 +20,7 @@
 	View.prototype.step = function () {
 		this.snake.move();
 		if (this.snake.lost) this.stop();
-		this.board.render();
+		this.renderBoard();
 	}
 	
 	View.prototype.bindKeys = function () {
@@ -45,6 +46,25 @@
 				default:
 					view.stop();
 					break;
+			}
+		});
+	}
+	
+	View.prototype.renderBoard = function () {
+		this.board.constructBoard();
+		var $el = this.$el;
+		
+		$el.empty();
+		
+		_.flatten(this.board.grid).forEach(function (space) {
+			if (space === "S") {
+				$el.append("<li class='snake'>");
+			} 
+			else if (space === "A") {
+				$el.append("<li class='apple'>");
+			} 
+			else {
+				$el.append("<li>");
 			}
 		});
 	}

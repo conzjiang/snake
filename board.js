@@ -4,7 +4,6 @@
 	var Board = SnakeGame.Board = function () {
 		this.snake = new SnakeGame.Snake(this);
 		this.apple = this.generateApple();
-		this.constructBoard();
 	}
 	
 	Board.DIMS = 30;
@@ -17,15 +16,8 @@
 		
 		var pos = randomPos();
 		
-		if (this.grid) {
-			while (this.grid[pos[0]][pos[1]] === "S") {
-				pos = randomPos();
-			}
-		}
-		else {
-			while (_(pos).isEqual(Board.CENTER)) {
-				pos = randomPos();
-			}
+		while (this.snake.isSegment(pos)) {
+			pos = randomPos();
 		}
 		
 		return { pos: pos };
@@ -39,10 +31,10 @@
 	
 	Board.prototype.createGrid = function () {
 		var grid = [];
-		
+
 		for (var i = 0; i < Board.DIMS; i++) {
 			grid[i] = [];
-			
+
 			for (var j = 0; j < Board.DIMS; j++) {
 				grid[i][j] = null;
 			}
@@ -64,29 +56,9 @@
 		this.grid[pos[0]][pos[1]] = "A";
 	}
 	
-	Board.prototype.render = function () {
-		this.constructBoard();
-		
-		var board = this;
-		$("ul").empty();
-		
-		this.grid.forEach(function (row) {
-			row.forEach(function (space) {
-				if (space === "S") {
-					$("ul").append("<li class='snake'>");
-				} 
-				else if (space === "A") {
-					$("ul").append("<li class='apple'>");
-				} 
-				else {
-					$("ul").append("<li>");
-				}
-			});
-		});
-	}
-	
 	Board.prototype.validPos = function () {
-		return this.snake.pos[0] >= 0 && this.snake.pos[1] >= 0 && 
-					 this.snake.pos[0] < 30 && this.snake.pos[1] < 30;
+		return this.snake.pos.every(function (element) {
+			return element >= 0 && element < Board.DIMS;
+		});
 	}
 })(this);

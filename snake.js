@@ -9,24 +9,15 @@
 		this.lost = false;
 	}
 	
+	Snake.DELTAS = {
+		"N": [-1, 0],
+		"E": [0, 1],
+		"S": [1, 0],
+		"W": [0, -1]
+	}
+	
 	Snake.prototype.move = function () {
-		var plus;
-		
-		switch(this.dir) {
-			case "N":
-				plus = [-1, 0];
-				break;
-			case "E":
-				plus = [0, 1];
-				break;
-			case "S":
-				plus = [1, 0];
-				break;
-			case "W":
-				plus = [0, -1];
-				break;
-		}
-		
+		var plus = Snake.DELTAS[this.dir];
 		this.pos = [this.pos[0] + plus[0], this.pos[1] + plus[1]];
 		this.checkMove();
 	}
@@ -55,13 +46,21 @@
 	}
 	
 	Snake.prototype.hitSelf = function () {
-		var hit = false;
-		var head = this.segments[0];
+		return this.isSegment(this.segments[0], true);
+	}
+	
+	Snake.prototype.isSegment = function (pos, hitSelf) {
+		var isSeg = false;
+		var segments = this.segments;
+		if (hitSelf) segments = this.segments.slice(1);
 		
-		this.segments.slice(1).forEach(function (pos) {
-			if (_(head).isEqual(pos)) { hit = true; return true; }
+		segments.forEach(function (snakePos) {
+			if (_(pos).isEqual(snakePos)) {
+				isSeg = true;
+				return true;
+			}
 		});
 		
-		return hit;
+		return isSeg;
 	}
 })(this);
