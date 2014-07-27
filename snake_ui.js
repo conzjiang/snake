@@ -49,6 +49,9 @@
 					break;
 				default:
 					view.stop();
+					var $gameStatus = view.$el.find(".game-status");
+					$gameStatus.removeClass("start-game");
+					$gameStatus.addClass("pause-game");
 					break;
 			}
 		});
@@ -56,7 +59,7 @@
 	
 	View.prototype.renderBoard = function () {
 		this.board.constructBoard();
-		var $el = this.$el;
+		var $el = this.$el.find("ul");
 		var food = this.board.food.foodClass;
 		
 		$el.empty();

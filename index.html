@@ -138,10 +138,13 @@
 		
 		button {
 			padding: 10px 20px;
-			border-radius: 10px;
+			font-weight: 600;
+			color: #fff;
+			border-radius: 8px;
 		}
 		
-		button:active {
+		button#start:active,
+		button.new-game:active {
 			padding-top: 13px;
 			border: 0;
 		}
@@ -149,14 +152,31 @@
 		button.start {
 			margin: 27px 0;
 			font-size: 20px;
-			font-weight: 600;
-			color: #fff;
 			background: rgb(0, 190, 0);
 			border-bottom: 3px solid rgb(0, 100, 0);
 		}
 		
 		button.start:hover {
 			background: #00A338;
+		}
+		
+		button.resume {
+			display: block;
+			margin: auto;
+			margin-bottom: 13px;
+			font-size: 20px;
+			text-transform: uppercase;
+			background: rgb(42, 136, 219);
+			border-bottom: 3px solid rgb(14, 73, 124);
+		}
+		
+		button.resume:hover {
+			background: rgb(31, 118, 196);
+		}
+		
+		button.new-game {
+			margin: 0;
+			font-size: 16px;
 		}
 		
 		section.game-status > article#pause,
@@ -168,7 +188,11 @@
 			display: none;
 		}
 		
-		article.show {
+		section.pause-game > article#start {
+			display: none;
+		}
+		
+		section.pause-game > article#pause {
 			display: block;
 		}
 		
@@ -188,12 +212,12 @@
 			
 			<section class="game-status">
 				<article id="start" class="buttons-container">
-					<button class="start">Start Game</button>
+					<button id="start" class="start">Start Game</button>
 				</article>
 			
 				<article id="pause" class="buttons-container">
-					<button class="resume">Resume</button>
-					<button class="new-game">New Game</button>
+					<button id="start" class="resume">Resume</button>
+					<button class="start new-game">New Game</button>
 				</article>
 				
 				<article id="end" class="buttons-container">
@@ -208,11 +232,22 @@
 		<script src="utilities/jquery.js"></script>
 		<script>
 		$(document).ready(function () {
-			var game = new SnakeGame.View($("ul"));
+			var game = new SnakeGame.View($(".game"));
+			var $buttons = $(".game-status");
 			
-			$("button.start").on("click", function () {
-				$(this).closest("section").addClass("start-game");
+			var startGame = function () {
+				$buttons.removeClass("pause-game");
+				$buttons.addClass("start-game");
 				game.start();
+			}
+			
+			$("button#start").on("click", function () {
+				startGame();
+			});
+			
+			$("button.new-game").on("click", function () {
+				game = new SnakeGame.View($(".game"));
+				startGame();
 			});
 		});
 		</script>
