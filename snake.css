@@ -1,0 +1,209 @@
+/* RESETS */
+html, body, h1, h2, strong, ul, li, div, section, article, p, span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font: inherit;
+	-webkit-appearance: none;
+	box-sizing: content-box;
+	display: inline;
+	vertical-align: baseline;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+}
+
+/* STYLING BASICS */
+body {
+	font-family: sans-serif;
+}
+
+.group:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+h1 {
+	display: block;
+	margin-top: 10px;
+	font-weight: 800;
+	font-size: 36px;
+	text-align: center;
+}
+
+h2 {
+	display: block;
+	margin: 5px 0;
+	font-weight: 600;
+	font-size: 20px;
+	text-align: center;
+}
+
+ul {
+	list-style: none;
+	width: 400px;
+}
+
+li {
+	float: left;
+	width: 20px;
+	height: 20px;
+}
+
+p {
+	display: block;
+	margin: 10px 0;
+	text-align: center;
+}
+
+/* SNAKE */
+.snake {
+	width: 18px;
+	height: 18px;
+	background: green;
+	border: 1px solid #fff;
+	border-radius: 5px;
+}
+
+.head {
+	background: #f00;
+}
+
+/* FOOD */
+.apple {
+	background-image: url("food_sprites.png");
+	background-position: 0 0;
+	background-size: cover;
+}
+
+.banana {
+	background-image: url("food_sprites.png");
+	background-position: 0 80px;
+	background-size: cover;
+}
+
+.burger {
+	background-image: url("food_sprites.png");
+	background-position: 0 60px;
+	background-size: cover;
+}
+
+.chicken {
+	background-image: url("food_sprites.png");
+	background-position: 0 40px;
+	background-size: cover;
+}
+
+.pizza {
+	background-image: url("food_sprites.png");
+	background-position: 0 20px;
+	background-size: cover;
+}
+
+/* GAME CONTAINERS */
+.game {
+	position: relative;
+	display: block;
+	width: 400px;
+	height: 400px;
+	margin: 20px auto;
+	margin-bottom: 0;
+	border: 5px solid #000;
+}
+
+section.game-status {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(226, 126, 126, 0.8);
+}
+
+article.buttons-container {
+	position: absolute;
+	top: 50%;
+	margin-top: -50px;
+	width: 100%;
+	height: 100px;
+	text-align: center;
+}
+
+section.start-game,
+section.game-status > article#pause,
+section.game-status > article#end,
+section.pause-game > article#start,
+section.end-game > article#start {
+	display: none;
+}
+
+section.pause-game > article#pause,
+section.end-game > article#end {
+	display: block;
+}
+
+section.end-game {
+	background: rgba(226, 126, 126, 0.95);
+}
+
+article#end {
+	margin-top: -70px;
+	height: 140px;
+}
+
+article#end > h2 {
+	margin: 20px;
+}
+
+/* BUTTONS */
+button {
+	padding: 10px 20px;
+	font-weight: 600;
+	color: #fff;
+	border-radius: 8px;
+}
+
+button.start {
+	margin: 27px 0;
+	font-size: 20px;
+	background: rgb(0, 190, 0);
+	border-bottom: 3px solid rgb(0, 100, 0);
+}
+
+button.start:hover {
+	background: #00A338;
+}
+
+button.resume {
+	display: block;
+	margin: auto;
+	margin-bottom: 13px;
+	font-size: 20px;
+	text-transform: uppercase;
+	background: rgb(42, 136, 219);
+	border-bottom: 3px solid rgb(14, 73, 124);
+}
+
+button.resume:hover {
+	background: rgb(31, 118, 196);
+}
+
+button.new-game {
+	margin: 0;
+	font-size: 16px;
+}
+
+button#start:active,
+button.new-game:active {
+	padding-top: 13px;
+	border: 0;
+}
