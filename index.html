@@ -7,11 +7,26 @@
 		<script src="snake_ui.js"></script>
 		<script src="board.js"></script>
 		<style>
-		html, body, h1, h2, strong, ul, li {
+		html, body, h1, h2, strong, ul, li, div, section, article, p {
 			margin: 0;
 			padding: 0;
 			border: 0;
 			font: inherit;
+		}
+		
+		button {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			outline: 0;
+			font: inherit;
+			-webkit-appearance: none;
+			box-sizing: content-box;
+			display: inline;
+			vertical-align: baseline;
+			background: transparent;
+			color: inherit;
+			cursor: pointer;
 		}
 		
 		body {
@@ -40,11 +55,19 @@
 			text-align: center;
 		}
 		
+		.game {
+			position: relative;
+			display: block;
+			width: 400px;
+			height: 400px;
+			margin: 20px auto;
+			margin-bottom: 0;
+			border: 5px solid #000;
+		}
+		
 		ul {
 			list-style: none;
 			width: 400px;
-			margin: 20px auto;
-			border: 5px solid #000;
 		}
 		
 		li {
@@ -65,19 +88,101 @@
 			background-image: url("apple.ico");
 			background-size: cover;
 		}
+		
+		section.game-status {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(145, 145, 145, 0.8);
+		}
+		
+		article.buttons-container {
+			position: absolute;
+			top: 50%;
+			margin-top: -50px;
+			width: 100%;
+			height: 100px;
+			text-align: center;
+		}
+		
+		button {
+			padding: 10px 20px;
+			border-radius: 10px;
+		}
+		
+		button:active {
+			padding-top: 13px;
+			border: 0;
+		}
+		
+		button.start {
+			margin: 27px 0;
+			font-size: 20px;
+			font-weight: 600;
+			color: #fff;
+			background: rgb(0, 190, 0);
+			border-bottom: 3px solid rgb(0, 100, 0);
+		}
+		
+		button.start:hover {
+			background: #00A338;
+		}
+		
+		section.game-status > article#pause {
+			display: none;
+		}
+		
+		section.start-game {
+			display: none;
+		}
+		
+		article.hide {
+			display: none;
+		}
+		
+		article.show {
+			display: block;
+		}
+		
+		p {
+			display: block;
+			margin: 10px 0;
+			text-align: center;
+		}
 		</style>
 	</head>
 	<body>
 		<h1>Snake</h1>
 		<h2>Score: <strong id="score">0</strong></h2>
 		
-		<ul class="group"></ul>
+		<div class="game">
+			<ul class="group"></ul>
+			
+			<section class="game-status">
+				<article id="start" class="buttons-container">
+					<button class="start">Start Game</button>
+				</article>
+			
+				<article id="pause" class="buttons-container">
+					<button class="resume">Resume</button>
+					<button class="new-game">New Game</button>
+				</article>
+			</section>
+		</div>
+		
+		<p>Press any key to pause.</p>
 		
 		<script src="utilities/jquery.js"></script>
 		<script>
 		$(document).ready(function () {
 			var game = new SnakeGame.View($("ul"));
-			game.start();
+			
+			$("button.start").on("click", function () {
+				$(this).closest("section").addClass("start-game");
+				game.start();
+			});
 		});
 		</script>
 	</body>

@@ -9,11 +9,10 @@
 		this.score = 0;
 		
 		this.bindKeys();
+		this.renderBoard();
 	}
 	
 	View.prototype.start = function () {
-		this.renderBoard();
-		
 		var view = this;
 		this.interval = setInterval(function () { 
 			view.step();
