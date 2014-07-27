@@ -124,7 +124,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(145, 145, 145, 0.8);
+			background: rgba(226, 126, 126, 0.8);
 		}
 		
 		article.buttons-container {
@@ -202,7 +202,7 @@
 		}
 		
 		section.end-game {
-			background: rgba(145, 145, 145, 0.95);
+			background: rgba(226, 126, 126, 0.95);
 		}
 		
 		section.end-game > article#start {
@@ -258,7 +258,8 @@
 			var $buttons = $(".game-status");
 			
 			var startGame = function () {
-				$buttons.removeClass("pause-game");
+				$buttons.removeClass();
+				$buttons.addClass("game-status");
 				$buttons.addClass("start-game");
 				game.start();
 			}
