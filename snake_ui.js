@@ -5,7 +5,7 @@
 		this.$el = $el;
 		this.board = new SnakeGame.Board();
 		this.snake = this.board.snake;
-		this.speed = 300;
+		this.speed = 200;
 		this.score = 0;
 		this.renderBoard();
 	}
@@ -66,10 +66,13 @@
 		}
 		
 		if (this.snake.segments.length === 10) {
-			changeSpeed(200);
+			changeSpeed(150);
 		}
 		else if (this.snake.segments.length === 20) {
-			changeSpeed(150);
+			changeSpeed(125);
+		}
+		else if (this.snake.segments.length === 30) {
+			changeSpeed(100);
 		}
 	}
 	
