@@ -7,12 +7,12 @@
 		this.snake = this.board.snake;
 		this.speed = 300;
 		this.score = 0;
-		
-		this.bindKeys();
 		this.renderBoard();
 	}
 	
 	View.prototype.start = function () {
+		this.bindKeys();
+		
 		var view = this;
 		this.interval = setInterval(function () { 
 			view.step();
@@ -99,6 +99,7 @@
 	
 	View.prototype.stop = function () {
 		clearInterval(this.interval);
+		$(document).unbind("keydown");
 	}
 	
 	View.prototype.countScore = function () {
