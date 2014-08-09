@@ -57,6 +57,38 @@
 		});
 	}
 	
+	View.prototype.gaugeSpeed = function () {
+		var view = this;
+		var changeSpeed = function (newSpeed) {
+			view.stop();
+			view.speed = newSpeed;
+			view.start();
+		}
+		
+		if (this.snake.segments.length === 10) {
+			changeSpeed(200);
+		}
+		else if (this.snake.segments.length === 20) {
+			changeSpeed(150);
+		}
+	}
+	
+	View.prototype.countScore = function () {
+		this.score = (this.snake.segments.length - 1) * 10;
+	}
+	
+	View.prototype.stop = function () {
+		clearInterval(this.interval);
+		$(document).unbind("keydown");
+	}
+	
+	View.prototype.endGame = function () {
+		this.stop();
+		var $section = this.$el.find(".game-status");
+		$section.removeClass("start-game");
+		$section.addClass("end-game");
+	}
+	
 	View.prototype.renderBoard = function () {
 		this.board.constructBoard();
 		var $el = this.$el.find("ul");
@@ -79,37 +111,5 @@
 				$el.append("<li>");
 			}
 		});
-	}
-	
-	View.prototype.gaugeSpeed = function () {
-		var view = this;
-		var changeSpeed = function (newSpeed) {
-			view.stop();
-			view.speed = newSpeed;
-			view.start();
-		}
-		
-		if (this.snake.segments.length === 10) {
-			changeSpeed(200);
-		}
-		else if (this.snake.segments.length === 20) {
-			changeSpeed(150);
-		}
-	}
-	
-	View.prototype.stop = function () {
-		clearInterval(this.interval);
-		$(document).unbind("keydown");
-	}
-	
-	View.prototype.countScore = function () {
-		this.score = (this.snake.segments.length - 1) * 10;
-	}
-	
-	View.prototype.endGame = function () {
-		this.stop();
-		var $section = this.$el.find(".game-status");
-		$section.removeClass("start-game");
-		$section.addClass("end-game");
 	}
 })(this);

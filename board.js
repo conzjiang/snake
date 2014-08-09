@@ -16,10 +16,7 @@
 		}
 		
 		var pos = randomPos();
-		
-		while (this.snake.isSegment(pos)) {
-			pos = randomPos();
-		}
+		while (this.snake.isSegment(pos)) { pos = randomPos(); }
 		
 		var food = ["apple", "banana", "burger", "chicken", "pizza"];
 		
