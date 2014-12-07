@@ -8,16 +8,12 @@
     this.speed = 150;
     this.score = 0;
     this.renderBoard();
-  }
+  };
 
   View.prototype.start = function () {
     this.bindKeys();
-
-    var view = this;
-    this.interval = setInterval(function () {
-      view.step();
-    }, this.speed);
-  }
+    this.interval = setInterval(this.step.bind(this), this.speed);
+  };
 
   View.prototype.step = function () {
     this.snake.move();
@@ -25,11 +21,11 @@
     if (this.snake.lost) this.endGame();
     this.countScore();
     this.renderBoard();
-  }
+  };
 
   View.prototype.bindKeys = function () {
     var snake = this.snake;
-    var view = this;
+    var changeGameState = this.changeGameState;
 
     $(document).on("keydown", function () {
       event.preventDefault();
@@ -48,45 +44,39 @@
           snake.turn("S");
           break;
         default:
-          view.stop();
-          var $gameStatus = view.$el.find(".game-status");
-          $gameStatus.removeClass("start-game");
-          $gameStatus.addClass("pause-game");
+          changeGameState("pause-game");
           break;
       }
     });
-  }
+  };
 
   View.prototype.gaugeSpeed = function () {
-    var view = this;
+    var that = this;
     var changeSpeed = function (newSpeed) {
-      view.stop();
-      view.speed = newSpeed;
-      view.start();
-    }
+      that.stop();
+      that.speed = newSpeed;
+      that.start();
+    };
 
     if (this.snake.segments.length === 10) {
       changeSpeed(125);
     } else if (this.snake.segments.length === 20) {
       changeSpeed(100);
     }
-  }
+  };
 
   View.prototype.countScore = function () {
     this.score = (this.snake.segments.length - 1) * 10;
-  }
+  };
 
   View.prototype.stop = function () {
     clearInterval(this.interval);
-    $(document).unbind("keydown");
-  }
+    $(document).off("keydown");
+  };
 
   View.prototype.endGame = function () {
-    this.stop();
-    var $section = this.$el.find(".game-status");
-    $section.removeClass("start-game");
-    $section.addClass("end-game");
-  }
+    this.changeGameState("end-game");
+  };
 
   View.prototype.renderBoard = function () {
     this.board.constructBoard();
@@ -110,5 +100,11 @@
         $el.append("<li>");
       }
     });
-  }
+  };
+
+  View.prototype.changeGameState = function (gameState) {
+    var $gameStatus = this.$el.find(".game-status");
+    this.stop();
+    $gameStatus.removeClass("start-game").addClass(gameState);
+  };
 })(this);
