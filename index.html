@@ -1,62 +1,45 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Snake</title>
-		<script src="utilities/underscore.js"></script>
-		<script src="utilities/jquery.js"></script>
-		<script src="snake.js"></script>
-		<script src="snake_ui.js"></script>
-		<script src="board.js"></script>
-		<link rel="stylesheet" href="snake.css">
-	</head>
-	<body>
-		<h1>A Very Hungry Caterpillar</h1>
-		<h2>Score: <strong id="score">0</strong></h2>
-		
-		<figure class="game">
-			<ul class="group"></ul>
-			
-			<section class="game-status">
-				<article id="start" class="buttons-container">
-					<button id="start" class="start">Start Game</button>
-				</article>
-			
-				<article id="pause" class="buttons-container">
-					<button id="start" class="resume">Resume</button>
-					<button class="start new-game">New Game</button>
-				</article>
-				
-				<article id="end" class="buttons-container">
-					<p>You can't eat that! You lose!</p>
-					<h2>Final Score: <strong id="score"></strong></h2>
-					<button class="start new-game">New Game</button>
-				</article>
-			</section>
-		</figure>
-		
-		<p>Press any key to pause.</p>
-		
-		<script>
-		$(document).ready(function () {
-			var game = new SnakeGame.View($(".game"));
-			var $buttons = $(".game-status");
-			
-			var startGame = function () {
-				$buttons.removeClass();
-				$buttons.addClass("game-status");
-				$buttons.addClass("start-game");
-				game.start();
-			}
-			
-			$("button#start").on("click", function () {
-				startGame();
-			});
-			
-			$("button.new-game").on("click", function () {
-				game = new SnakeGame.View($(".game"));
-				startGame();
-			});
-		});
-		</script>
-	</body>
+  <head>
+    <title>Snake</title>
+    <script src="utilities/underscore.js"></script>
+    <script src="utilities/jquery.js"></script>
+    <script src="snake.js"></script>
+    <script src="snake_ui.js"></script>
+    <script src="board.js"></script>
+    <link rel="stylesheet" href="snake.css">
+  </head>
+  <body>
+    <h1>A Very Hungry Caterpillar</h1>
+    <h2>Score: <strong id="score">0</strong></h2>
+
+    <figure class="game">
+      <ul class="group"></ul>
+
+      <section class="game-status">
+        <article id="start" class="buttons-container">
+          <button id="start" class="start">Start Game</button>
+        </article>
+
+        <article id="pause" class="buttons-container">
+          <button id="start" class="resume">Resume</button>
+          <button class="start new-game">New Game</button>
+        </article>
+
+        <article id="end" class="buttons-container">
+          <p>You can't eat that! You lose!</p>
+          <h2>Final Score: <strong id="score"></strong></h2>
+          <button class="start new-game">New Game</button>
+        </article>
+      </section>
+    </figure>
+
+    <p>Press any key to pause.</p>
+
+    <script>
+    $(function () {
+      new SnakeGame.View($(".game"));
+    });
+    </script>
+  </body>
 </html>

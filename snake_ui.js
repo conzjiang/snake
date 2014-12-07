@@ -7,7 +7,32 @@
     this.snake = this.board.snake;
     this.speed = 150;
     this.score = 0;
+    this.bindKeys();
     this.renderBoard();
+  };
+
+  View.prototype.bindKeys = function () {
+    var that = this;
+
+    $("button#start").on("click", this.startGame.bind(this));
+
+    $("button.new-game").on("click", function () {
+      that.remove();
+      new SnakeGame.View($(".game")).startGame();
+    });
+  };
+
+  View.prototype.startGame = function () {
+    var $buttons = this.$el.find(".game-status");
+
+    $buttons.removeClass();
+    $buttons.addClass("game-status").addClass("start-game");
+    this.start();
+  };
+
+  View.prototype.remove = function () {
+    $("button#start").off();
+    $("button.new-game").off();
   };
 
   View.prototype.renderBoard = function () {
@@ -37,13 +62,13 @@
   };
 
   View.prototype.start = function () {
-    this.bindKeys();
+    this.bindGameControls();
     this.interval = setInterval(this.step.bind(this), this.speed);
   };
 
-  View.prototype.bindKeys = function () {
+  View.prototype.bindGameControls = function () {
     var snake = this.snake;
-    var changeGameState = this.changeGameState;
+    var that = this;
 
     $(document).on("keydown", function () {
       event.preventDefault();
@@ -62,7 +87,8 @@
           snake.turn("S");
           break;
         default:
-          changeGameState("pause-game");
+          that.stop();
+          that.changeGameState("pause-game");
           break;
       }
     });
