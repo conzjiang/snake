@@ -14,13 +14,14 @@
     var randomPos = function () {
       return [random(Board.DIMS), random(Board.DIMS)];
     };
-
     var pos = randomPos();
+    var foods = Board.FOODS;
+
     while (this.snake.isSegment(pos)) { pos = randomPos(); }
 
     return {
       pos: pos,
-      foodClass: Board.FOODS[random(food.length)]
+      foodClass: foods[random(foods.length)]
     };
   };
 

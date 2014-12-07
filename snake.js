@@ -16,14 +16,14 @@
     "W": [0, -1]
   };
 
+  Snake.prototype.turn = function (newDir) {
+    this.dir = newDir;
+  };
+
   Snake.prototype.move = function () {
     var plus = Snake.DELTAS[this.dir];
     this.pos = [this.pos[0] + plus[0], this.pos[1] + plus[1]];
     this.checkMove();
-  };
-
-  Snake.prototype.turn = function (newDir) {
-    this.dir = newDir;
   };
 
   Snake.prototype.checkMove = function () {
